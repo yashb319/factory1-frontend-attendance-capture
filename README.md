@@ -6,7 +6,7 @@ This is a separate prototype app for:
 
 - QR code attendance
 - Factory1 employee photo roster sync
-- Browser prototype photo matching
+- Browser face descriptor matching with face-api.js
 - Manual fallback
 - Posting attendance to Factory1 backend `/api/public/attendance-capture/device-event`
 
@@ -64,14 +64,14 @@ https://factory1.app/attendance?employeeCode=EMP001
 
 ## Photo Mode
 
-Photo mode currently loads employee photos from Factory1 and uses a small browser
-perceptual hash. This is useful for validating the workflow, but it is not
-production-grade face recognition.
+Photo mode loads employee photos from Factory1 and creates local face descriptors
+with face-api.js. The model files live in `public/models/face-api`, so the
+deployed capture app can run matching in the browser without a paid API.
 
 Production path:
 
 1. Store employee reference photos securely.
-2. Generate face embeddings with a real recognition model.
+2. Generate face embeddings with a stronger server-side model if browser matching is not enough.
 3. Match live captures server-side or on-device.
 4. Keep QR/RFID as fallback for low-confidence matches.
 
