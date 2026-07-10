@@ -31,7 +31,7 @@ export function SettingsPanel({
         Backend URL
         <input
           value={settings.apiBaseUrl}
-          disabled={locked}
+          disabled={true}
           onChange={(event) =>
             onChange((current) => ({
               ...current,

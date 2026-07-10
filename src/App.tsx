@@ -25,7 +25,7 @@ const settingsKey = "factory1.capture.settings";
 
 export function App() {
   const [settings, setSettings] = useLocalStorage<Settings>(settingsKey, {
-    apiBaseUrl: "http://localhost:8080",
+    apiBaseUrl: "https://api.factory1.in",
     captureKey: "",
     deviceId: "factory1-mobile-camera-1",
   });
