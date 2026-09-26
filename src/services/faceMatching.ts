@@ -15,10 +15,10 @@ export async function ensureFaceModels() {
   return faceModelsPromise;
 }
 
-export async function faceDescriptorFromImage(dataUrl: string) {
+export async function faceDescriptorFromImage(src: string) {
   await ensureFaceModels();
 
-  const image = await loadImage(dataUrl);
+  const image = await loadImage(src);
   const result = await faceapi
     .detectSingleFace(
       image,
@@ -40,6 +40,9 @@ export function faceDistance(left: Float32Array, right: Float32Array) {
 function loadImage(src: string) {
   return new Promise<HTMLImageElement>((resolve, reject) => {
     const image = new Image();
+    if (/^https?:\/\//i.test(src)) {
+      image.crossOrigin = "anonymous";
+    }
     image.onload = () => resolve(image);
     image.onerror = reject;
     image.src = src;
